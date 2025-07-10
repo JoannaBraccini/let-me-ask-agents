@@ -23,10 +23,13 @@ docker compose up -d
 
 ---
 
-npm i postgres
+npm i postgres drizzle-orm
+npm i drizzle-kit drizzle-seed -D
 
 ---
 
-npm i drizzle-orm
-npm i drizzle-kit -D
+npx drizzle-kit generate
+npx drizzle-kit migrate
+npm run db:seed
+npx drizzle-kit studio
 ```
