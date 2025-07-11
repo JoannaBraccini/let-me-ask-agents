@@ -23,4 +23,6 @@ app.get('/health', () => {
 })
 
 app.register(getRoomsRoute)
-app.listen({ port: env.PORT })
+app.listen({ port: env.PORT }, () => {
+  console.log(`🚀 Server rodando na porta ${env.PORT}!`)
+})
