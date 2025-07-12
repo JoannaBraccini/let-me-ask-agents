@@ -9,6 +9,9 @@
     "rules": {
       "nursery": {
         "noUnknownAtRule": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "off"
       }
     }
   },
