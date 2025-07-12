@@ -1,7 +1,7 @@
-import dayjs from 'dayjs'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useRooms } from '@/http/use-rooms'
+import { dayjs } from '@/lib/dayjs'
 import { Badge } from './ui/badge'
 import { Card, CardContent, CardDescription, CardTitle } from './ui/card'
 
@@ -40,7 +40,7 @@ export function RoomList() {
                   className="border-zinc-600 bg-zinc-800 text-xs text-zinc-300"
                   variant={'secondary'}
                 >
-                  {dayjs(room.createdAt).toNow()}
+                  {dayjs(room.createdAt).fromNow()}
                 </Badge>
                 <Badge
                   className="border-zinc-600 bg-zinc-800 text-xs text-zinc-300"

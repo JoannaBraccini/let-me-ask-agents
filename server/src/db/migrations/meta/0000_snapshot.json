@@ -1,5 +1,5 @@
 {
-  "id": "c4647242-8630-4fab-bf16-57dec21130f6",
+  "id": "3d3dc9d4-173e-407a-be13-f876b9310869",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -47,12 +47,8 @@
           "name": "audio_chunks_room_id_rooms_id_fk",
           "tableFrom": "audio_chunks",
           "tableTo": "rooms",
-          "columnsFrom": [
-            "room_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["room_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -106,12 +102,8 @@
           "name": "questions_room_id_rooms_id_fk",
           "tableFrom": "questions",
           "tableTo": "rooms",
-          "columnsFrom": [
-            "room_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["room_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }

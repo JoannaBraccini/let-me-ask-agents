@@ -65,7 +65,7 @@ export function QuestionItem({ question }: QuestionItemProps) {
 
           <div className="flex justify-end">
             <span className="text-muted-foreground text-xs">
-              {dayjs(question.createdAt).toNow()}
+              {dayjs(question.createdAt).fromNow()}
             </span>
           </div>
         </div>
