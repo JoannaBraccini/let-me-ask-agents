@@ -17,12 +17,16 @@
 
 ### ✨ Funcionalidades
 
-- 🏠 Listagem de salas disponíveis
-- 🔄 Sistema de perguntas em tempo real
-- 📱 Interface responsiva e moderna
-- 🔒 Validação de dados robusta
-- 🎯 Roteamento inteligente
-- 💾 Persistência de dados com PostgreSQL
+- 🏠 **Listagem de salas disponíveis** - Visualize todas as salas criadas
+- ➕ **Criação de salas** - Crie novas salas para discussões
+- ❓ **Sistema de perguntas** - Faça perguntas nas salas
+- 🎤 **Gravação de áudio** - Grave perguntas por áudio usando Web APIs
+- 🤖 **Transcrição IA** - Converta áudio em texto usando Google Gemini
+- 🔍 **Busca por embeddings** - Encontre perguntas similares usando vetores
+- 📱 **Interface responsiva** - Design moderno que funciona em qualquer dispositivo
+- 🔒 **Validação robusta** - Validação completa de dados com Zod
+- 🎯 **Roteamento inteligente** - Navegação SPA com React Router
+- 💾 **Persistência avançada** - PostgreSQL com extensão pgvector para embeddings
 
 ---
 
@@ -40,23 +44,28 @@ let-me-ask-agents/
 
 **Stack Principal:**
 
-- **Node.js** + **TypeScript** - Ambiente de execução
+- **Node.js** + **TypeScript** - Ambiente de execução moderno
 - **Fastify** - Framework web rápido e eficiente
 - **PostgreSQL** + **pgvector** - Banco de dados com extensão para embeddings
 - **Drizzle ORM** - Object-Relational Mapping type-safe
+- **Google Gemini** - IA para transcrição de áudio e geração de embeddings
 - **Docker** - Containerização do ambiente
-- **Zod** - Validação de esquemas e tipos
+- **Zod v4** - Validação de esquemas e tipos
+- **Biome** - Linting e formatação unificados
 
 ### 🎨 Frontend (`/web`)
 
 **Stack Principal:**
 
-- **React 19** + **TypeScript** - Interface moderna e reativa
-- **Vite** - Build tool e servidor de desenvolvimento
-- **React Router DOM** - Roteamento para SPA
-- **TanStack Query** - Gerenciamento de estado assíncrono
-- **Tailwind CSS** - Framework CSS utilitário
-- **Shadcn/ui** - Sistema de componentes acessíveis
+- **React 19** + **TypeScript** - Interface moderna e reativa com as últimas funcionalidades
+- **Vite 7** - Build tool e servidor de desenvolvimento ultra-rápido
+- **React Router DOM v7** - Roteamento para SPA
+- **TanStack Query v5** - Gerenciamento de estado assíncrono poderoso
+- **Tailwind CSS v4** - Framework CSS utilitário com novas funcionalidades
+- **Shadcn/ui** - Sistema de componentes acessíveis baseado em Radix UI
+- **Web Audio API** - Gravação de áudio nativa do navegador
+- **React Hook Form** - Gerenciamento de formulários performático
+- **Biome** - Linting e formatação modernos
 
 ---
 
@@ -101,8 +110,9 @@ npm run dev
 ### 🌐 URLs de Acesso
 
 - **Frontend**: <http://localhost:5173>
-- **Backend API**: <http://localhost:5000>
-- **Health Check**: <http://localhost:5000/health>
+- **Backend API**: <http://localhost:3333>
+- **Health Check**: <http://localhost:3333/health>
+- **Drizzle Studio**: Disponível via `npm run studio` no backend
 
 ---
 
@@ -119,10 +129,13 @@ let-me-ask-agents/
 │   │   ├── 📁 db/
 │   │   │   ├── connection.ts      # Conexão com banco
 │   │   │   ├── seed.ts           # População de dados
-│   │   │   ├── 📁 schema/         # Esquemas do banco
-│   │   │   └── 📁 migrations/     # Migrações
-│   │   └── 📁 http/
-│   │       └── 📁 routes/         # Rotas da API
+│   │   │   ├── 📁 schema/         # Esquemas do banco (rooms, questions, audio-chunks)
+│   │   │   └── 📁 migrations/     # Migrações do Drizzle
+│   │   ├── 📁 http/
+│   │   │   └── 📁 routes/         # Rotas da API (CRUD + upload áudio)
+│   │   └── 📁 services/
+│   │       ├── env.ts            # Validação de variáveis de ambiente
+│   │       └── gemini.ts         # Integração com Google Gemini IA
 │   ├── 📁 docker/
 │   ├── package.json
 │   ├── docker-compose.yml
@@ -131,11 +144,25 @@ let-me-ask-agents/
 ├── 📁 web/
 │   ├── 📁 src/
 │   │   ├── main.tsx              # Ponto de entrada
-│   │   ├── app.tsx               # App principal
+│   │   ├── app.tsx               # App principal com roteamento
 │   │   ├── 📁 components/
-│   │   │   └── 📁 ui/            # Componentes Shadcn
+│   │   │   ├── create-room-form.tsx     # Formulário de criação
+│   │   │   ├── question-form.tsx        # Formulário de perguntas
+│   │   │   ├── question-item.tsx        # Item individual da pergunta
+│   │   │   ├── question-list.tsx        # Lista de perguntas
+│   │   │   ├── room-list.tsx            # Lista de salas
+│   │   │   └── 📁 ui/                   # Componentes Shadcn/ui
 │   │   ├── 📁 pages/             # Páginas da aplicação
-│   │   └── 📁 lib/               # Utilitários
+│   │   │   ├── create-room.tsx          # Página de criação de sala
+│   │   │   ├── record-room-audio.tsx    # Página de gravação de áudio
+│   │   │   └── room.tsx                 # Página da sala
+│   │   ├── 📁 http/              # Hooks para API
+│   │   │   ├── use-create-question.ts
+│   │   │   ├── use-create-room.ts
+│   │   │   ├── use-room-questions.ts
+│   │   │   ├── use-rooms.ts
+│   │   │   └── 📁 types/               # Tipos TypeScript
+│   │   └── 📁 lib/               # Utilitários (dayjs, utils)
 │   ├── package.json
 │   ├── vite.config.ts
 │   └── components.json
@@ -151,12 +178,15 @@ let-me-ask-agents/
 
 ### Backend (`/server`)
 
-| Comando            | Descrição                                  |
-| ------------------ | ------------------------------------------ |
-| `npm run setup`    | Setup inicial completo (Docker + seed)     |
-| `npm run dev:full` | Desenvolvimento completo (Docker + server) |
-| `npm run dev`      | Apenas servidor (Docker já rodando)        |
-| `npm run db:seed`  | Popula banco com dados de exemplo          |
+| Comando               | Descrição                                  |
+| --------------------- | ------------------------------------------ |
+| `npm run setup`       | Setup inicial completo (Docker + seed)     |
+| `npm run dev:full`    | Desenvolvimento completo (Docker + server) |
+| `npm run dev`         | Apenas servidor (Docker já rodando)        |
+| `npm run db:seed`     | Popula banco com dados de exemplo          |
+| `npm run db:generate` | Gera migrações do Drizzle                  |
+| `npm run db:migrate`  | Aplica migrações no banco                  |
+| `npm run studio`      | Abre Drizzle Studio para visualizar dados  |
 
 ### Frontend (`/web`)
 
@@ -181,18 +211,20 @@ let-me-ask-agents/
 
 ### 🔙 Backend
 
-- **Fastify** - Framework web performático
-- **PostgreSQL** - Banco relacional robusto
-- **Drizzle ORM** - ORM type-safe moderno
-- **Zod** - Validação de schemas
+- **Fastify** - Framework web performático e moderno
+- **PostgreSQL** + **pgvector** - Banco relacional com suporte a embeddings
+- **Drizzle ORM** - ORM type-safe moderno e performático
+- **Google Gemini** - IA para transcrição de áudio e embeddings
+- **Zod v4** - Validação de schemas robusta
 
 ### 🎨 Frontend
 
-- **React 19** - Biblioteca UI mais recente
-- **Vite** - Build tool rápido
-- **Tailwind CSS** - CSS utilitário
-- **Radix UI** - Primitivos acessíveis
-- **TanStack Query** - State management assíncrono
+- **React 19** - Biblioteca UI com as últimas funcionalidades
+- **Vite 7** - Build tool extremamente rápido
+- **Tailwind CSS v4** - CSS utilitário com novas funcionalidades
+- **Radix UI** - Primitivos acessíveis para componentes
+- **TanStack Query v5** - State management assíncrono poderoso
+- **Web Audio API** - Gravação de áudio nativa do navegador
 
 ---
 
