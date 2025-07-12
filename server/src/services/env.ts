@@ -7,6 +7,7 @@ const envSchema = z.object({
     .url()
     .startsWith("postgresql://")
     .default("postgresql://"),
+  GEMINI_API_KEY: z.string(),
 });
 
 export const env = envSchema.parse(process.env);

@@ -8,41 +8,58 @@ import { Card, CardContent, CardDescription, CardTitle } from './ui/card'
 export function RoomList() {
   const { data, isLoading } = useRooms()
   return (
-    <Card>
-      <CardTitle className="text-center">Salas recentes</CardTitle>
-      <CardDescription className="text-center text-muted-foreground text-sm">
+    <Card className="border-none bg-transparent shadow-none">
+      <CardTitle className="mb-2 text-center text-white text-xl">
+        Salas recentes
+      </CardTitle>
+      <CardDescription className="mb-4 text-center text-sm text-zinc-400">
         Acesso rápido às salas criadas recentemente.
       </CardDescription>
-      <CardContent className="flex flex-col gap-3">
+      <CardContent className="flex flex-col gap-3 p-0">
         {isLoading && (
           <p className="text-muted-foreground text-sm">Carregando salas...</p>
         )}
 
         {data?.map((room) => (
           <Link
-            className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent/50"
+            className="group flex flex-col gap-3 rounded-lg border border-zinc-700 p-4 transition-colors hover:border-zinc-600 hover:bg-zinc-800/50 sm:flex-row sm:items-center sm:justify-between"
             key={room.id}
             to={`/room/${room.id}`}
           >
-            <div className="flex flex-1 flex-col gap-1">
-              <h3 className="font-medium">{room.name}</h3>
+            {/* Nome da sala */}
+            <div className="flex-1">
+              <h3 className="mb-1 font-medium text-base text-white">
+                {room.name}
+              </h3>
             </div>
 
-            <div className="flex items-center gap-2">
-              <Badge className="text-xs" variant={'secondary'}>
-                {dayjs(room.createdAt).toNow()}
-              </Badge>
-              <Badge className="text-xs" variant={'secondary'}>
-                {room.questionsCount === 0
-                  ? 'Nenhuma pergunta'
-                  : `${room.questionsCount} pergunta${room.questionsCount !== 1 ? 's' : ''}`}
-              </Badge>
-            </div>
+            {/* Badges - empilhados no mobile */}
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <div className="flex flex-wrap gap-2">
+                <Badge
+                  className="border-zinc-600 bg-zinc-800 text-xs text-zinc-300"
+                  variant={'secondary'}
+                >
+                  {dayjs(room.createdAt).toNow()}
+                </Badge>
+                <Badge
+                  className="border-zinc-600 bg-zinc-800 text-xs text-zinc-300"
+                  variant={'secondary'}
+                >
+                  {room.questionsCount === 0
+                    ? 'Nenhuma pergunta'
+                    : `${room.questionsCount} pergunta${room.questionsCount !== 1 ? 's' : ''}`}
+                </Badge>
+              </div>
 
-            <span className="flex items-center gap-1 text-sm">
-              Entrar
-              <ArrowRight className="size-3" />
-            </span>
+              {/* Botão entrar */}
+              <div className="flex items-center justify-end sm:justify-center">
+                <span className="flex items-center gap-1 text-sm text-zinc-400 transition-colors group-hover:text-white">
+                  Entrar
+                  <ArrowRight className="size-3" />
+                </span>
+              </div>
+            </div>
           </Link>
         ))}
       </CardContent>

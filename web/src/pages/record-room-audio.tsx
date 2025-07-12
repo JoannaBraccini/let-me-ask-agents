@@ -1,6 +1,8 @@
-/** biome-ignore-all lint/suspicious/noConsole: somente aviso */
+/** biome-ignore-all lint/suspicious/noConsole: necessário */
+
+import { ArrowLeft, Mic, MicOff, Radio } from 'lucide-react'
 import { useRef, useState } from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 
 const isRecordingSupported =
@@ -44,6 +46,8 @@ export function RecordRoomAudio() {
     )
 
     const result = await response.json()
+
+    console.log(result)
   }
 
   function createRecorder(audio: MediaStream) {
@@ -61,9 +65,12 @@ export function RecordRoomAudio() {
     recorder.current.onstart = () => {
       console.log('Gravação iniciada!')
     }
+
     recorder.current.onstop = () => {
       console.log('Gravação encerrada/pausada')
     }
+
+    recorder.current.start()
   }
 
   async function startRecording() {
@@ -96,13 +103,121 @@ export function RecordRoomAudio() {
   }
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-3">
-      {isRecording ? (
-        <Button onClick={stopRecording}>Pausar gravação</Button>
-      ) : (
-        <Button onClick={startRecording}>Gravar áudio</Button>
-      )}
-      {isRecording ? <p>Gravando...</p> : <p>Pausado</p>}
+    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950">
+      {/* Header */}
+      <header className="border-zinc-800 border-b bg-zinc-950/80 backdrop-blur-sm">
+        <div className="container mx-auto max-w-6xl px-4 py-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <Link to={`/room/${params.roomId}`}>
+              <Button className="hover:bg-zinc-800" variant="outline">
+                <ArrowLeft className="mr-2 size-4" />
+                Voltar à Sala
+              </Button>
+            </Link>
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-zinc-400 sm:text-sm">
+                Sala: {params.roomId}
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Conteúdo principal */}
+      <main className="container mx-auto max-w-4xl px-4 py-6 sm:py-12">
+        <div className="flex min-h-[60vh] flex-col items-center justify-center">
+          {/* Card principal */}
+          <div className="w-full max-w-md rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 text-center backdrop-blur-sm sm:p-8">
+            <div className="mb-6 sm:mb-8">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-600/20 sm:h-20 sm:w-20">
+                <Radio className="h-8 w-8 text-red-500 sm:h-10 sm:w-10" />
+              </div>
+              <h1 className="mb-2 font-bold text-white text-xl sm:text-2xl">
+                Gravação de Áudio
+              </h1>
+              <p className="text-sm text-zinc-400 sm:text-base">
+                Grave sua pergunta ou comentário para a sala
+              </p>
+            </div>
+
+            {/* Status de gravação */}
+            <div className="mb-8">
+              <div
+                className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${
+                  isRecording ? 'animate-pulse bg-red-600' : 'bg-zinc-700'
+                }`}
+              >
+                {isRecording ? (
+                  <Mic className="h-8 w-8 text-white" />
+                ) : (
+                  <MicOff className="h-8 w-8 text-zinc-400" />
+                )}
+              </div>
+
+              <div className="text-center">
+                <p
+                  className={`font-semibold text-lg ${
+                    isRecording ? 'text-red-400' : 'text-zinc-400'
+                  }`}
+                >
+                  {isRecording ? 'Gravando...' : 'Pausado'}
+                </p>
+                {isRecording && (
+                  <p className="mt-1 text-sm text-zinc-500">
+                    A gravação é enviada automaticamente a cada 5 segundos
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Botões de controle */}
+            <div className="space-y-4">
+              {isRecording ? (
+                <Button
+                  className="w-full bg-red-600 hover:bg-red-700"
+                  onClick={stopRecording}
+                  size="lg"
+                >
+                  <MicOff className="mr-2 h-5 w-5" />
+                  Pausar Gravação
+                </Button>
+              ) : (
+                <Button
+                  className="w-full bg-green-600 hover:bg-green-700"
+                  onClick={startRecording}
+                  size="lg"
+                >
+                  <Mic className="mr-2 h-5 w-5" />
+                  Iniciar Gravação
+                </Button>
+              )}
+
+              {!isRecordingSupported && (
+                <div className="rounded-lg border border-yellow-600/30 bg-yellow-900/20 p-4">
+                  <p className="text-sm text-yellow-400">
+                    ⚠️ Seu navegador não suporta gravação de áudio
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Informações adicionais */}
+          <div className="mt-6 w-full max-w-md text-center sm:mt-8">
+            <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
+              <h3 className="mb-2 font-semibold text-sm text-white sm:text-base">
+                Como funciona?
+              </h3>
+              <ul className="space-y-1 text-xs text-zinc-400 sm:text-sm">
+                <li>• Clique em "Iniciar Gravação" para começar</li>
+                <li>• O áudio é enviado automaticamente a cada 5 segundos</li>
+                <li>• Use "Pausar Gravação" para parar temporariamente</li>
+                <li>• Volte à sala para ver as perguntas processadas</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   )
 }

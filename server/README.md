@@ -38,9 +38,9 @@ npm run dev:full
 
 ## 🔧 URLs Importantes
 
-- **API**: http://localhost:5000
-- **Health Check**: http://localhost:5000/health
-- **Rooms**: http://localhost:5000/rooms
+- **API**: http://localhost:3333
+- **Health Check**: http://localhost:3333/health
+- **Rooms**: http://localhost:3333/rooms
 - **PostgreSQL**: localhost:5432
 
 ## 📝 Instruções de Setup
