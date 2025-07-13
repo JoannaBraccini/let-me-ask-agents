@@ -1,18 +1,18 @@
-import { ArrowLeft, Radio } from 'lucide-react'
-import { Link, Navigate, useParams } from 'react-router-dom'
-import { QuestionForm } from '@/components/question-form'
-import { QuestionList } from '@/components/question-list'
-import { Button } from '@/components/ui/button'
+import { ArrowLeft, Radio } from "lucide-react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import { QuestionForm } from "@/components/question-form";
+import { QuestionList } from "@/components/question-list";
+import { Button } from "@/components/ui/button";
 
 type RoomParams = {
-  roomId: string
-}
+  roomId: string;
+};
 
 export function Room() {
-  const params = useParams<RoomParams>()
+  const params = useParams<RoomParams>();
 
   if (!params.roomId) {
-    return <Navigate replace to="/" />
+    return <Navigate replace to="/" />;
   }
 
   return (
@@ -59,31 +59,26 @@ export function Room() {
           </p>
         </div>
 
-        {/* Layout em grid para melhor organização */}
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-          {/* Seção do formulário - ocupa 1 coluna no desktop */}
-          <div className="order-2 lg:order-1 lg:col-span-1">
-            <div className="lg:sticky lg:top-24">
-              <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 backdrop-blur-sm lg:p-6">
-                <h2 className="mb-4 font-semibold text-lg text-white lg:text-xl">
-                  Nova Pergunta
-                </h2>
-                <QuestionForm roomId={params.roomId} />
-              </div>
-            </div>
-          </div>
+        {/* Layout simplificado */}
+        <div className="space-y-6">
+          {/* Seção única - perguntas da sala */}
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-6 backdrop-blur-sm">
+            <h2 className="mb-6 font-semibold text-xl text-white">
+              Perguntas da Sala
+            </h2>
 
-          {/* Seção das perguntas - ocupa 2 colunas no desktop */}
-          <div className="order-1 lg:order-2 lg:col-span-2">
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4 backdrop-blur-sm lg:p-6">
-              <h2 className="mb-4 font-semibold text-lg text-white lg:mb-6 lg:text-xl">
-                Perguntas da Sala
-              </h2>
+            {/* Formulário integrado */}
+            <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900/50 p-5">
+              <QuestionForm roomId={params.roomId} />
+            </div>
+
+            {/* Lista de perguntas */}
+            <div>
               <QuestionList roomId={params.roomId} />
             </div>
           </div>
         </div>
       </main>
     </div>
-  )
+  );
 }
