@@ -25,13 +25,11 @@ Para documentação técnica detalhada, consulte:
 
 ## 🎬 Demonstração
 
-<!-- Substitua pelo link gerado após upload no GitHub Assets -->
-
-https://github.com/user-attachments/assets/SEU-VIDEO-AQUI
+https://github.com/user-attachments/assets/98a5ee13-73c6-4bec-9c1e-c211ee834b96
 
 > 📹 **Vídeo demonstrando o sistema em funcionamento**
 >
-> _Upload do vídeo será feito em breve..._
+> _Sistema completo funcionando com busca inteligente, cache e sugestões automáticas_
 
 ---
 
