@@ -1,0 +1,32 @@
+{
+  "name": "let-me-ask-agents",
+  "version": "1.0.0",
+  "description": "Sistema de perguntas e respostas com IA",
+  "private": true,
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "// === DEVELOPMENT ===": "",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:web\"",
+    "dev:server": "cd server && npm run dev",
+    "dev:web": "cd web && npm run dev",
+    "// === SETUP ===": "",
+    "setup": "cd server && npm run setup",
+    "// === DATABASE ===": "",
+    "db:fresh": "cd server && npm run db:fresh",
+    "db:studio": "cd server && npm run studio",
+    "// === BUILD ===": "",
+    "build": "cd web && npm run build",
+    "build:server": "cd server && npm run build",
+    "// === QUALITY ===": "",
+    "lint": "cd web && npm run check",
+    "lint:fix": "cd web && npm run check:fix"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "author": "Joanna Braccini",
+  "license": "MIT"
+}

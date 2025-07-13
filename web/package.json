@@ -4,9 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "// === WEB ===": "",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "// === CODE QUALITY ===": "",
     "lint": "biome lint src/",
     "lint:fix": "biome lint src/ --write",
     "format": "biome format src/ --write",
