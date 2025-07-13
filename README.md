@@ -2,12 +2,36 @@
   <h1>🤖 Let Me Ask Agents</h1>
   <p>Sistema de perguntas e respostas desenvolvido durante o <strong>NLW Agents</strong> da <strong>Rocketseat</strong></p>
   
-  [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-  [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-  [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-  [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-  [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript---
+
+## 📚 Documentação
+
+Para documentação técnica detalhada, consulte:
+
+- 📁 [`docs/`](./docs/) - Documentação completa do sistema e features implementadas
+
+---
+
+## 📝 Licençale=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+
 </div>
+
+---
+
+## 🎬 Demonstração
+
+<!-- Substitua pelo link gerado após upload no GitHub Assets -->
+
+https://github.com/user-attachments/assets/SEU-VIDEO-AQUI
+
+> 📹 **Vídeo demonstrando o sistema em funcionamento**
+>
+> _Upload do vídeo será feito em breve..._
 
 ---
 
@@ -228,7 +252,15 @@ let-me-ask-agents/
 
 ---
 
-## 📝 Licença
+## � Documentação
+
+Para documentação técnica detalhada, consulte:
+
+- 📁 [`docs/`](./docs/) - Documentação completa do sistema e features implementadas
+
+---
+
+## �📝 Licença
 
 Este projeto foi desenvolvido durante o **NLW Agents** da **Rocketseat** e está sob a [licença MIT](./LICENSE).
 
@@ -240,7 +272,7 @@ Este projeto foi desenvolvido durante o **NLW Agents** da **Rocketseat** e está
   <table>
     <tr>
       <td align="center">
-        <img src="./devpixel.png" width="100px" alt="Joanna Braccini"/>
+        <img src="./assets/devpixel.png" width="100px" alt="Joanna Braccini"/>
         <br />
         <b>Joanna Braccini</b>
         <br />
